@@ -1,0 +1,54 @@
+核心概念：
+StreamingContext
+
+def this(sparkContext: SparkContext, batchDuration: Duration) = {
+    this(sparkContext, null, batchDuration)
+}
+
+def this(conf: SparkConf, batchDuration: Duration) = {
+    this(StreamingContext.createNewSparkContext(conf), null, batchDuration)
+}
+
+batch interval可以根据你的应用程序需求的延迟要求以及集群可用的资源情况来设置
+
+
+一旦StreamingContext定义好之后，就可以做一些事情
+
+
+
+Discretized Streams (DStreams)
+Internally, a DStream is represented by a continuous series of RDDs
+Each RDD in a DStream contains data from a certain interval
+
+对DStream操作算子，比如map/flatMap，其实底层会被翻译为对DStream中的每个RDD都做相同的操作；
+因为一个DStream是由不同批次的RDD所构成的。
+
+
+Input DStreams and Receivers
+
+Every input DStream (except file stream, discussed later in this section) 
+is associated with a Receiver object which 
+receives the data from a source and stores it 
+in Spark’s memory for processing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

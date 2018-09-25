@@ -1,0 +1,30 @@
+CentOS 6.4  +
+
+本地登陆到远程服务器：ssh hadoop@192.168.199.111   登陆密码:hadoop
+
+需要大家在linux的hadoop用户的根目录(/home/hadoop)上创建如下目录
+	app    存放我们所有的软件的安装目录
+	data   存放我们的测试数据
+	lib    存放我们开发的jar
+	software  存放软件安装包的目录
+	source   存放我们的框架源码
+
+root用户的密码是多少，整个课程并不需要root用户，所有的操作均由hadoop用户完成
+有时我们需要使用root权限设置环境变量或者相关的操作，就使用sudo command
+
+
+Hadoop生态系统：cdh5.7.0
+所有的Hadoop生态的软件下载地址：http://archive.cloudera.com/cdh5/cdh/5/
+jdk: 1.8
+spark: 2.2
+scala: 2.11.8
+
+
+
+
+
+
+
+
+
+

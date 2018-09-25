@@ -1,0 +1,22 @@
+Receiver整合
+1) 启动zk
+2) 启动kafka
+3) 创建topic
+4) 通过控制台测试本topic是否能够正常的生产和消费信息
+
+
+spark-submit \
+--class com.imooc.spark.KafkaReceiverWordCount \
+--master local[2] \
+--name KafkaReceiverWordCount \
+--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 \
+/home/hadoop/lib/sparktrain-1.0.jar  hadoop000:2181 test kafka_streaming_topic 1
+
+
+spark-submit \
+--class com.imooc.spark.KafkaDirectWordCount \
+--master local[2] \
+--name KafkaDirectWordCount \
+--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 \
+/home/hadoop/lib/sparktrain-1.0.jar  hadoop000:9092 kafka_streaming_topic
+

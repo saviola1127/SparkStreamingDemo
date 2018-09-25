@@ -1,0 +1,82 @@
+streaming.conf
+
+agent1.sources=avro-source
+agent1.channels=logger-channel
+agent1.sinks=log-sink
+
+#define source
+agent1.sources.avro-source.type=avro
+agent1.sources.avro-source.bind=0.0.0.0
+agent1.sources.avro-source.port=41414
+
+#define channel
+agent1.channels.logger-channel.type=memory
+
+#define sink
+agent1.sinks.log-sink.type=logger
+
+agent1.sources.avro-source.channels=logger-channel
+agent1.sinks.log-sink.channel=logger-channel
+
+
+
+flume-ng agent \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/streaming.conf \
+--name agent1 \
+-Dflume.root.logger=INFO,console
+
+
+java.lang.ClassNotFoundException: org.apache.flume.clients.log4jappender.Log4jAppender
+
+
+./kafka-topics.sh --create --zookeeper hadoop000:2181 --replication-factor 1 --partitions 1 --topic streamingtopic
+
+
+streaming2.conf
+agent1.sources=avro-source
+agent1.channels=logger-channel
+agent1.sinks=kafka-sink
+
+#define source
+agent1.sources.avro-source.type=avro
+agent1.sources.avro-source.bind=0.0.0.0
+agent1.sources.avro-source.port=41414
+
+#define channel
+agent1.channels.logger-channel.type=memory
+
+#define sink
+agent1.sinks.kafka-sink.type=org.apache.flume.sink.kafka.KafkaSink
+agent1.sinks.kafka-sink.topic = streamingtopic
+agent1.sinks.kafka-sink.brokerList = hadoop000:9092
+agent1.sinks.kafka-sink.requiredAcks = 1
+agent1.sinks.kafka-sink.batchSize = 20
+
+agent1.sources.avro-source.channels=logger-channel
+agent1.sinks.kafka-sink.channel=logger-channel
+
+
+flume-ng agent \
+--conf $FLUME_HOME/conf \
+--conf-file $FLUME_HOME/conf/streaming2.conf \
+--name agent1 \
+-Dflume.root.logger=INFO,console
+
+
+
+我们现在是在本地进行测试的，在IDEA中运行LoggerGenerator，
+然后使用Flume、Kafka以及Spark Streaming进行处理操作。
+
+在生产上肯定不是这么干的，怎么干呢？
+1) 打包jar，执行LoggerGenerator类
+2) Flume、Kafka和我们的测试是一样的
+3) Spark Streaming的代码也是需要打成jar包，然后使用spark-submit的方式进行提交到环境上执行
+	可以根据你们的实际情况选择运行模式：local/yarn/standalone/mesos
+
+在生产上，整个流处理的流程都一样的，区别在于业务逻辑的复杂性
+
+
+
+
+
