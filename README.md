@@ -1,8 +1,5 @@
 # Spark Sreaming实时流处理项目实战
 
-   
-大家好，欢迎大家来到我在[慕课网](https://imooc.com)上的实战课程[《Spark Sreaming实时流处理项目实战》](https://coding.imooc.com/class/chapter/153.html)的官方代码仓。在本仓库中将提供课程学习过程中的代码以及笔记，如有错误信息，也欢迎大家以pull request的方式更新上来。
-
 ***
 
 ## 代码说明
@@ -31,7 +28,3 @@
 * Java拓展：使用Java开发Spark应用程序
 
 ***
-
-欢迎关注个人公众号，不定期会推送一些大数据相关的文章
-<br>
-![个人公众号](https://git.imooc.com/Project/coding-153/raw/master/qrcode.jpg)
